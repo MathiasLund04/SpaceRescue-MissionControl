@@ -2,12 +2,19 @@
   "name": "space-rescure",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0"
+  }
 }

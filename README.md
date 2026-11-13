@@ -15,3 +15,22 @@ Jeres opgave er at udvikle SpaceRescues backend, som kan administrere redningsmi
 <img width="798" height="398" alt="image" src="https://github.com/user-attachments/assets/336dc486-c88e-4df5-8938-8bed7bae93ad" />
 
 ## Startvejledning
+
+Installer afhængighederne og start backend-serveren:
+
+```bash
+npm install
+npm start
+```
+
+Indstil `MONGODB_URI` til din MongoDB-forbindelsesstreng, før serveren startes.
+Applikationen bruger databasen `SpaceRescue` og begynder først at lytte, når
+forbindelsen er etableret. Serveren lytter som standard på port `3000`; porten
+kan ændres med miljøvariablen `PORT`. Kør testene med:
+
+```bash
+npm test
+```
+
+Projektet indeholder den indledende API-struktur; forretningslogik implementeres
+i senere issues.
