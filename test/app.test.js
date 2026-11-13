@@ -20,7 +20,7 @@ test('all scaffold modules can be imported', () => {
     '../src/repositories/shipRepository',
     '../src/repositories/missionRepository',
     '../src/repositories/assignmentRepository',
-    '../src/models/shipModel',
+    '../src/models/spaceshipModel',
     '../src/models/missionModel',
     '../src/models/assignmentModel',
     '../src/clients/notificationClient',

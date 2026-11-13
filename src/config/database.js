@@ -15,7 +15,7 @@ const collections = Object.freeze({
   assignments: mongoose.connection.collection(COLLECTION_NAMES.assignments)
 });
 
-async function connectDatabase(uri = process.env.MONGODB_URI) {
+async function connectDatabase(uri = 'mongodb://localhost:27017/SpaceRescue') {
   // Fail fast rather than starting the API with no database configured.
   if (!uri) {
     throw new Error('MONGODB_URI must be configured before connecting to MongoDB');
