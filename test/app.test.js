@@ -16,6 +16,7 @@ test('all scaffold modules can be imported', () => {
     '../src/routes/missionRoutes',
     '../src/controllers/shipController',
     '../src/controllers/missionController',
+    '../src/services/shipService',
     '../src/services/missionService',
     '../src/repositories/shipRepository',
     '../src/repositories/missionRepository',
@@ -43,9 +44,9 @@ test('handles simultaneous requests to both mounted route groups', async (contex
 
   const { port } = server.address();
   const paths = [
-    '/api/ships',
+    '/api/ships/not-an-object-id',
     '/api/missions',
-    '/api/ships',
+    '/api/ships/not-an-object-id',
     '/api/missions'
   ];
 
