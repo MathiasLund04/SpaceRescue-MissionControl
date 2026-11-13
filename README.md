@@ -23,7 +23,14 @@ npm install
 npm start
 ```
 
-Indstil `MONGODB_URI` til din MongoDB-forbindelsesstreng, før serveren startes.
+Indsæt de indledende testdata i MongoDB med:
+
+```bash
+npm run seed
+```
+
+Indstil `MONGODB_URI` til din MongoDB-forbindelsesstreng, før serveren startes
+eller seed-scriptet køres.
 Applikationen bruger databasen `SpaceRescue` og begynder først at lytte, når
 forbindelsen er etableret. Serveren lytter som standard på port `3000`; porten
 kan ændres med miljøvariablen `PORT`. Kør testene med:
