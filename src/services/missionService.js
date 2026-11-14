@@ -1,6 +1,7 @@
 const missionRepository = require('../repositories/missionRepository');
 const assignmentRepository = require('../repositories/assignmentRepository');
 const shipRepository = require('../repositories/shipRepository');
+const notificationClient = require('../clients/notificationClient');
 
 async function getAllMissions() {
   return missionRepository.findAll();
@@ -21,8 +22,9 @@ function createAssignmentError(code, message) {
 }
 
 async function assignSpaceshipToMission(missionId, spaceshipId) {
+  let assignment;
   try {
-    return await assignmentRepository.withTransaction(async (session) => {
+    assignment = await assignmentRepository.withTransaction(async (session) => {
       const mission = await missionRepository.reserveForAssignment(missionId, session);
       if (!mission) {
         const existingMission = await missionRepository.findById(missionId, session);
@@ -65,6 +67,17 @@ async function assignSpaceshipToMission(missionId, spaceshipId) {
 
     throw error;
   }
+
+  try {
+    await notificationClient.sendMissionAssignedNotification({
+      missionId,
+      shipId: spaceshipId
+    });
+  } catch (error) {
+    console.error('Mission-assigned notification failed:', error);
+  }
+
+  return assignment;
 }
 
 module.exports = {

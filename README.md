@@ -23,6 +23,19 @@ npm install
 npm start
 ```
 
+Start informationssystemet i et separat terminalvindue:
+
+```bash
+npm run start:notifications
+```
+
+Backend-serveren sender missionstildelinger til
+`http://localhost:3001/api/notifications`. Informationssystemets port kan ændres
+med `NOTIFICATION_PORT`, og backendens mål-URL kan ændres med
+`NOTIFICATION_SERVICE_URL`. Notifikationer sendes efter, at tildelingen er
+committed; hvis informationssystemet ikke kan nås, bevares tildelingen, og
+fejlen logges. Der er ikke automatisk retry eller persistent kø.
+
 Indsæt de indledende testdata i MongoDB med:
 
 ```bash
