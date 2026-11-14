@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 const missionService = require('../services/missionService');
-const missionValidationSchema = require('../validators/missionValidationSchema');
 
 async function getAllMissions(request, response, next) {
   try {
@@ -12,10 +10,6 @@ async function getAllMissions(request, response, next) {
 }
 
 async function getMissionById(request, response, next) {
-  if (!mongoose.isValidObjectId(request.params.id)) {
-    return response.status(404).json({ error: 'Mission not found' });
-  }
-
   try {
     const mission = await missionService.getMissionById(request.params.id);
     if (!mission) {
@@ -29,23 +23,29 @@ async function getMissionById(request, response, next) {
 }
 
 async function createMission(request, response, next) {
-  const { value, error } = missionValidationSchema.validate(request.body);
-  if (error) {
-    return response.status(400).json({
-      error: error.details.map((detail) => detail.message)
-    });
-  }
-
   try {
-    const mission = await missionService.createMission(value);
+    const mission = await missionService.createMission(request.body);
     return response.status(201).json(mission);
   } catch (error) {
     return next(error);
   }
 }
 
+async function assignSpaceship(request, response, next) {
+  try {
+    const assignment = await missionService.assignSpaceshipToMission(
+      request.params.id,
+      request.body.spaceshipId
+    );
+    return response.status(201).json(assignment);
+  } catch (assignmentError) {
+    return next(assignmentError);
+  }
+}
+
 module.exports = {
   getAllMissions,
   getMissionById,
-  createMission
+  createMission,
+  assignSpaceship
 };

@@ -39,5 +39,8 @@ kan ændres med miljøvariablen `PORT`. Kør testene med:
 npm test
 ```
 
+Missions-tildeling bruger MongoDB-transaktioner. MongoDB skal derfor køre som
+replica set (også ved lokal udvikling), når tildelings-endpointet anvendes.
+
 Projektet indeholder den indledende API-struktur; forretningslogik implementeres
 i senere issues.

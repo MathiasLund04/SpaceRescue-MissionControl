@@ -28,7 +28,8 @@ test('all scaffold modules can be imported', () => {
     '../src/models/missionModel',
     '../src/models/assignmentModel',
     '../src/clients/notificationClient',
-    '../src/middleware/errorHandler'
+    '../src/middleware/errorHandler',
+    '../src/middleware/validateRequest'
   ];
 
   for (const modulePath of modules) {
@@ -45,9 +46,9 @@ test('handles simultaneous requests to both mounted route groups', async (contex
   const { port } = server.address();
   const paths = [
     '/api/ships/not-an-object-id',
-    '/api/missions',
+    '/api/missions/not-an-object-id',
     '/api/ships/not-an-object-id',
-    '/api/missions'
+    '/api/missions/not-an-object-id'
   ];
 
   const responses = await Promise.all(paths.map((path) => new Promise((resolve, reject) => {
@@ -57,7 +58,7 @@ test('handles simultaneous requests to both mounted route groups', async (contex
     }).on('error', reject);
   })));
 
-  assert.deepEqual(responses, [404, 404, 404, 404]);
+  assert.deepEqual(responses, [400, 400, 400, 400]);
 });
 
 test('does not start listening until the database connection succeeds', async (context) => {
